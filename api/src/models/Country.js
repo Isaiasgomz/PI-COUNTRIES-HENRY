@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
     area:{
       type:DataTypes.STRING
     },
-    poblation:{
+    population:{
       type:DataTypes.BIGINT
     }
   });

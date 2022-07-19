@@ -1,14 +1,25 @@
 const { Router } = require("express");
-
+const {Activity} = require('../db')
 
 const router = Router()
 
-// router.post('/', async (req,res)=>{
+router.post('/', async (req,res)=>{
+    
+    try {
+        const  {name, difficulty, duration, season} = req.body
+        const newActivity = await Activity.create({
+        name,
+        difficulty,
+        duration,
+        season
+    })
+    res.json(newActivity)
 
-// })
+    } catch (error) {
+        res.status(404).json(error)
+    }
+})
+
 
 
 module.exports= router
-// [ ] POST /activities:
-// Recibe los datos recolectados desde el formulario controlado de la ruta de creación de actividad turística por body
-// Crea una actividad turística en la base de datos, relacionada con los países correspondientes

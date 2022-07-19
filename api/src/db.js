@@ -13,7 +13,7 @@ const {
 // });
 
 
-const sequelize = new Sequelize('postgres://postgres:12345@$localhost:5432/countries', {
+const sequelize = new Sequelize('postgres://postgres:root@localhost:5432/countries', {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
