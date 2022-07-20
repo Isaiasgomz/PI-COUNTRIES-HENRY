@@ -39,9 +39,18 @@ router.get('/' , async (req,res)=>{
             data ? res.json(data) : res.json('name of city not equal country exist')
 
         }else{
-            await apiInfo()
-            const data = await Country.findAll()
-            res.json(data)
+            // await apiInfo()
+            // const data = await Country.findAll()
+            // res.json(data)
+            const verification= await Country.count()
+            if(verification > 1){
+                 const data = await Country.findAll()
+                res.json(data)
+            }else{
+                await apiInfo()
+                const data = await Country.findAll()
+                res.json(data)
+            }
         }
     } catch (error) {
         res.json(error)
