@@ -1,15 +1,28 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {getCountries} from '../actions/index'
 import { Link } from 'react-router-dom'
 import Card from './Card'
+import Paginado from './Paginado'
 
 
 function Home() {
 
     const dispatch = useDispatch()
     const AllCountries = useSelector((state) => state.Countries)
-    console.log(AllCountries)
+
+    const [currentPage, setCurrentPage] = useState(1)
+    let [countriesPerPage, setCountriesPerPage] = useState(10)
+    // const indexOfLastCountry = currentPage * countriesPerPage
+    const indexOfLastCountry = currentPage * (currentPage === 1 ? countriesPerPage=9 :countriesPerPage)
+
+    const indexOfFirstCouontry= indexOfLastCountry - countriesPerPage
+    const currentCountry = AllCountries.slice(indexOfFirstCouontry,indexOfLastCountry) 
+
+    const paginado = (pageNumber)=>{
+        setCurrentPage(pageNumber)
+    }
+    
     useEffect(() => {
         dispatch(getCountries()) 
     },[dispatch]);
@@ -35,9 +48,11 @@ function Home() {
             <option value={'Desc'}>Descendente</option>
         </select>
 
+        <Paginado  countriesPerPage={countriesPerPage} allCountries={AllCountries.length} paginado={paginado}/>
+
         {
-            AllCountries && AllCountries.map(e => {
-                return <Card  flag={e.flag} name={e.name} continent={e.continent} />
+            currentCountry && currentCountry.map(e => {
+                return <Card  key={e.id} flag={e.flag} name={e.name} continent={e.continent} />
             })
         }
 

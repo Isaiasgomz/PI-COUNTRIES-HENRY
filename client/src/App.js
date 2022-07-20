@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 // import './App.css';
-import Home from './conponets/Home'
-import Landing from './conponets/Landing'
+import Home from './components/Home'
+import Landing from './components/Landing'
 
 function App() {
   return (
     <React.Fragment>
       <Route path={'/'} component={Landing}/>
-      <Route path={'/home'} component={Home}/>
+      <Route exact path={'/home'} component={Home}/>
     </React.Fragment>
   );
 }
