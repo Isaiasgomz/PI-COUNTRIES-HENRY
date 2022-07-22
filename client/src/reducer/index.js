@@ -30,6 +30,12 @@ export default function rootReducer(state= initialState, action){
                 ...state,
                 Countries: action.payload
             }
+            
+
+        case 'POST_ACTIVITY':
+            return{
+                ...state
+            }    
 
             
 
@@ -57,7 +63,7 @@ export default function rootReducer(state= initialState, action){
             
         case 'ACTIVITY_BY_ORDER':
 
-            const sortArray = action.payload === 'Asc' ?
+            const sortArray = action.payload === 'Desc' ?
             state.Countries.sort(function(a,b) {
                 if(a.name > b.name) {
                     return 1
@@ -82,7 +88,16 @@ export default function rootReducer(state= initialState, action){
                 Countries:sortArray
             }
             
-           
+        case 'FILTER_BY_POPULATION':
+                const sortPopulation = action.payload === 'Asc' ?
+                state.Countries.sort((a,b) => a.population - b.population) :
+                state.Countries.sort((a,b) => b.population - a.population)
+
+                return{
+                    ...state,
+                    Countries: sortPopulation
+                }
+              
             
 
         default:

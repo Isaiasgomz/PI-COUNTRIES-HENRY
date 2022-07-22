@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getCountries, filteredCountryByType, filterByOrder} from '../actions/index'
+import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation} from '../actions/index'
 import { Link } from 'react-router-dom'
 import Card from './Card'
 import Paginado from './Paginado'
@@ -14,6 +14,7 @@ function Home() {
     // const allActivities = useSelector((state) => state.Activities)
 
     const [ordenado, setOrdenado]  = useState('')
+    // const [orderPopulation, setOrderPopulation] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     let [countriesPerPage, setCountriesPerPage] = useState(10)
     // const indexOfLastCountry = currentPage * countriesPerPage
@@ -45,6 +46,14 @@ function Home() {
     //     dispatch(filterActivity(e.target.value))
     // }
 
+    function handleFilterByPopulation(e){
+        e.preventDefault()
+        dispatch(filterByPopulation(e.target.value))
+        setCurrentPage(1)
+        setOrdenado(`ordenado ${e.target.value}`)
+
+    }
+
     function handleFilterByName(e){
         e.preventDefault()
         dispatch(filterByOrder(e.target.value))
@@ -63,13 +72,11 @@ function Home() {
 
         <SearchBar/>
         
-        <select onClick={(e) => handleFilterByName(e) }>
-            <option value={'Asc'}>Ascedente</option>
-            <option value={'Desc'}>Descendente</option>
-        </select>
+       
 
 
         <select onClick={(e) =>handleFilteredByType(e)}>
+            <option >CONTINENTE</option>
             <option value={'all'}>Todos Los Continentes</option>
             <option value={'Africa'}>Africa</option>
             <option value={'Asia'}>Asia</option>
@@ -77,6 +84,20 @@ function Home() {
             <option value={'North America'}>North America</option>
             <option value={'South America'}>South America</option>
             <option value={'Oceania'}>Oceania</option>
+        </select>
+
+        <select onClick={(e) => handleFilterByPopulation(e) }>
+            <option >POBLACION</option>
+            <option value={'Asc'}>Ascedente</option>
+            <option value={'Desc'}>Descendente</option>
+        </select>
+
+
+
+        <select onClick={(e) => handleFilterByName(e) }>
+            <option >ORDEN</option>
+            <option value={'Asc'}>Ascedente</option>
+            <option value={'Desc'}>Descendente</option>
         </select>
 {/* 
 

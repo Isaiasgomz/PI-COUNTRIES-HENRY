@@ -22,6 +22,14 @@ export function getCountries(){
 //     }
 // }
 
+
+export function postActivity (activity) {
+    return async function(dispatch){
+       const resolve = await axios.post('http://localhost:3001/activities', activity)
+       return resolve
+    }
+}
+
 export function filteredCountryByType(typeOfCountry){
     return{
         type:'COUNTRY_BY_TYPE',
@@ -39,6 +47,13 @@ export function filteredCountryByType(typeOfCountry){
 export function filterByOrder(order){
     return{
         type:'ACTIVITY_BY_ORDER',
+        payload: order
+    }
+}
+
+export function filterByPopulation (order){
+    return{
+        type:'FILTER_BY_POPULATION',
         payload: order
     }
 }

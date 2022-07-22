@@ -1,9 +1,18 @@
 import React, { useState } from 'react'
+import {  useSelector,useDispatch } from 'react-redux'
+import {postActivity} from '../actions/index'
+import {useHistory} from 'react-router-dom'
 
 
 
 function Activity() {
 
+    const dispatch = useDispatch()
+
+    const history = useHistory()
+
+    const AllCountries = useSelector((state) => state.Countries)
+    
      
 
     const [input, setInput] = useState({
@@ -23,75 +32,162 @@ function Activity() {
 
     }
 
-    const handleSubmit = (e)=>{
-        e.preventDefault()
-       
-    }
 
-    const handleCheckBox = (e) =>{
-        if(e.checked){
+    const handleCheckBoxSeason = (e) =>{
+       
+        if(e.target.checked){
             setInput({
                 ...input,
-                season:e.checked
+                season:e.target.value
             })
         }
     }
 
 
+    const handleCheckBoxDifficulty = (e) =>{
+        
+        if(e.target.checked){
+            setInput({
+                ...input,
+                difficulty: e.target.value
+            })
+        }
+    }
+
+    const handleSelectCountry = (e) =>{
+        console.log(e.target.value)
+        setInput({
+            ...input,
+            countries:[...input.countries, e.target.value]
+        })
+    }
+
+
+    const handleSubmit = (e)=>{
+        console.log(input)
+        e.preventDefault()
+        dispatch(postActivity(input))
+        setInput({
+            name:'',
+            difficulty:'',
+            duration:'',
+            season:'',
+            countries:[]
+        })
+        alert('Actividad Creada Correctamente')
+       history.push('/home')
+       
+    }
+
+
       return (
     <div>
+
         <h1> Crea tu actividad</h1>
 
-        <form >
+        <form  onSubmit={(e) => handleSubmit(e)}>
+
             <label>Nombre</label>
             <input type={'text'}
             name={'name'}
             value={input.name}
             onChange={(e)=> handleInput(e)}/>
+            <br/>
 
-
-            <label>Dificultad</label>
-            <input type={'number'} 
-            name={'difficulty'}
-            value={input.difficulty}
-            onChange={(e)=> handleInput(e)}/>
-
-            <label>Duracion</label>
-            <input type={'datatime'} 
+            
+            
+            
+            <label>
+            Duracion</label>
+            <input type={'time'} 
             name={'duration'} 
             value={input.duration}
             onChange={(e)=> handleInput(e)}/>
+            <br/>
 
-            <label>
+
+
+            <label>Temporada</label>
+            <label> Primavera
             <input type={'checkbox'}
             name={'Primavera'}
             value={'Primavera'}
-            onChange={(e)=> handleCheckBox(e)}/>
-            Primavera</label>
+            onChange={(e)=> handleCheckBoxSeason(e)}/>
+            </label>
 
-            <label>
+            <label> Verano
             <input type={'checkbox'}
             name={'Verano'}
             value={'Verano'}
-            onChange={(e)=> handleCheckBox(e)}/>
-            Verano</label>
+            onChange={(e)=> handleCheckBoxSeason(e)}/>
+            </label>
 
-            <label>
+            <label> Otoño
             <input type={'checkbox'}
             name={'Otoño'}
             value={'Otoño'}
-            onChange={(e)=> handleCheckBox(e)}/>
-            Otoño</label>
+            onChange={(e)=> handleCheckBoxSeason(e)}/>
+            </label>
 
-            <label>
+            <label> Invierno
             <input type={'checkbox'}
             name={'Diciembre'}
-            value={'Diciembrea'}
-            onChange={(e)=> handleCheckBox(e)}/> Diciembre</label>
+            value={'Diciembre'}
+            onChange={(e)=> handleCheckBoxSeason(e)}/> </label>
+            <br/>
 
+
+
+            <label> Dificultad</label>
+            <label> 1
+            <input  type={'checkbox'} 
+             name={'difficulty'}
+              value={'1'}
+              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
+            </label>
+
+            <label> 2
+            <input  type={'checkbox'} 
+             name={'difficulty'}
+              value={'2'}
+              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
+            </label>
+
+            <label> 3
+            <input  type={'checkbox'} 
+             name={'difficulty'} 
+             value={'3'}
+             onClick={(e) =>handleCheckBoxDifficulty(e)}/>
+            </label>
+
+            <label> 4
+            <input  type={'checkbox'} 
+             name={'difficulty'} 
+             value={'4'}
+             onClick={(e) =>handleCheckBoxDifficulty(e)}/>
+            </label>
+
+            <label> 5
+            <input  type={'checkbox'} 
+             name={'difficulty'} 
+             value={'5'}
+             onClick={(e) =>handleCheckBoxDifficulty(e)}/>
+            </label>
+
+
+            <select onChange={ (e) => handleSelectCountry(e)}>
+                <option>Seleccionar Paises</option>
+                { AllCountries && AllCountries.map(item => (
+                    <option key={item.id}
+                    value={item.name}>{item.name}</option>
+                ))}
+            </select>
+
+
+        <button type='submit'>Crear Actividad</button>
+      
         </form>
 
-        <button onClick={(e) => handleSubmit(e)}>Crear Actividad</button>
     </div>
   )
 }
