@@ -25,6 +25,19 @@ const apiInfo = async () =>{
 }
 
 
+const getInfoDataBase =  async () =>{
+
+   return await Country.findAll({
+        include:{
+            model: Activity,
+            attributes: ['name'],
+            through: {
+                atrributes:[],
+            },
+        }
+    })
+}
+
 
 
 router.get('/' , async (req,res)=>{
@@ -33,7 +46,14 @@ router.get('/' , async (req,res)=>{
         if(name){
             const data = await Country.findAll({
                 where:{
-                     name
+                    name
+                },
+                include:{
+                    model: Activity,
+                    attributes: ['name'],
+                    through: {
+                        atrributes:[],
+                    },
                 }
             })
             data ? res.json(data) : res.json('name of city not equal country exist')
@@ -42,11 +62,11 @@ router.get('/' , async (req,res)=>{
         
             const verification= await Country.count()
             if(verification > 1){
-                 const data = await Country.findAll()
+                 const data = await getInfoDataBase()
                 res.json(data)
             }else{
                 await apiInfo()
-                const data = await Country.findAll()
+                const data = await getInfoDataBase()
                 res.json(data)
             }
         }
