@@ -44,6 +44,9 @@ router.get('/' , async (req,res)=>{
     try {
         const {name} = req.query
         if(name){
+            // const response = await getInfoDataBase()
+            // const data = await response.filter(item.name.toLowerCase().include(name.toLowerCase()))
+
             const data = await Country.findAll({
                 where:{
                     name

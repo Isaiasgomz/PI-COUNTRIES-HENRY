@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
 
         },
         duration:{
-            type:DataTypes.INTEGER
+            type:DataTypes.STRING
         },
         season:{
             type:DataTypes.ENUM(
