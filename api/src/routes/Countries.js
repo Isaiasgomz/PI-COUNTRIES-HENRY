@@ -30,10 +30,10 @@ const getInfoDataBase =  async () =>{
    return await Country.findAll({
         include:{
             model: Activity,
-            // attributes: ['name'],
-            // through: {
-            //     atrributes:[],
-            // },
+            attributes: ['name'],
+            through: {
+                atrributes:[],
+            },
         }
     })
 }

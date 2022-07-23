@@ -6,9 +6,32 @@ const router = Router()
 
 router.get('/', async (req,res) =>{
     try {
-    const allActivities = await Activity.findAll()
-    res.json(allActivities)
+    const {name} = req.query
+    if(name){
+        const response =  await Country.findAll({
+            include: Activity
+        }) 
+    
+         const rta = response.filter(item =>{
+            for (let index = 0; index < item.activities.length; index++) {
+                const element = item.activities[index].name
+                if(element === name){
+                    return true
+                }else{
+                    return false
+                }
+                
+            }
+         })       
         
+           
+        rta.length ? res.json(rta) : res.json('name of activity not equal country exist')
+    }else{
+        
+        const allActivities = await Activity.findAll()
+        res.json(allActivities)
+            
+    }
     } catch (error) {
      res.status(404).json(error)   
     }
