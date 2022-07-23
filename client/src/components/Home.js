@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation} from '../actions/index'
+import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation, filterActivity, getActivities} from '../actions/index'
 import { Link } from 'react-router-dom'
 import Card from './Card'
 import Paginado from './Paginado'
@@ -11,7 +11,7 @@ function Home() {
 
     const dispatch = useDispatch()
     const AllCountries = useSelector((state) => state.Countries)
-    // const allActivities = useSelector((state) => state.Activities)
+    const allActivities = useSelector((state) => state.Activities)
 
     const [ordenado, setOrdenado]  = useState('')
     // const [orderPopulation, setOrderPopulation] = useState('')
@@ -28,7 +28,8 @@ function Home() {
     }
     
     useEffect(() => {
-        dispatch(getCountries()) 
+        dispatch(getCountries())
+        dispatch(getActivities()) 
     },[dispatch]);
 
     const handleUpdate = (e) =>{
@@ -41,10 +42,12 @@ function Home() {
         dispatch(filteredCountryByType(e.target.value))
     }
 
-    // function handleFilterCreated(e){
-    //     e.preventDefault()
-    //     dispatch(filterActivity(e.target.value))
-    // }
+    function handleFilterCreated(e){
+        e.preventDefault()
+        dispatch(filterActivity(e.target.value))
+        setCurrentPage(1)
+        setOrdenado(`ordenado ${e.target.value}`)
+    }
 
     function handleFilterByPopulation(e){
         e.preventDefault()
@@ -99,25 +102,41 @@ function Home() {
             <option value={'Asc'}>Ascedente</option>
             <option value={'Desc'}>Descendente</option>
         </select>
-{/* 
 
 
-        <select onMouseMove={()=> dispatch(getActivities())} onClick={(e) => handleFilterCreated(e) }>
-             <option value={'all'}>Todas</option>
+
+
+
+        <select >
+             <option name={'all'} 
+             value={'all'} 
+             onClick={(e) => handleFilterCreated(e)}>ACTIVIDAD</option>
+
             {
-                allActivities && allActivities.map(item => {
-                  return  <option onClick={(e) => handleFilterCreated(e) } value={item.name}>{item.name}</option>
-                })
+                allActivities && allActivities.map(item => (
+                   <option 
+                   name={item.name}  
+                   value={item.name} 
+                    onClick={(e) => handleFilterCreated(e) } 
+                    >{item.name}</option>
+                ))
             }
-        </select> */}
+        </select>
 
     
 
-        <Paginado  countriesPerPage={countriesPerPage} allCountries={AllCountries.length} paginado={paginado}/>
+        <Paginado  countriesPerPage={countriesPerPage} 
+        allCountries={AllCountries.length} 
+        paginado={paginado}/>
 
         {
             currentCountry && currentCountry.map(e => {
-                return <Card  key={e.id} flag={e.flag} name={e.name} id={e.id} continent={e.continent} />
+                return <Card 
+                 key={e.id} 
+                 flag={e.flag} 
+                 name={e.name} 
+                 id={e.id} 
+                 continent={e.continent} />
             })
         }
 

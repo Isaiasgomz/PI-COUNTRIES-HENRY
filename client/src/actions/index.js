@@ -15,12 +15,12 @@ export function getCountries(){
 //     }
 // }
 
-// export function getActivities(){
-//     return async function(dispatch){
-//         const allActivities = await axios.get('http://localhost:3001/activities')
-//         return dispatch({type:'GET_ACTIVITIES', payload: allActivities.data})
-//     }
-// }
+export function getActivities(){
+    return async function(dispatch){
+        const allActivities = await axios.get('http://localhost:3001/activities')
+        return dispatch({type:'GET_ACTIVITIES', payload: allActivities.data})
+    }
+}
 
 
 export function postActivity (activity) {
@@ -37,12 +37,12 @@ export function filteredCountryByType(typeOfCountry){
     }
 }
 
-// export function filterActivity (name){
-//     return{
-//         type:'ACTIVITY_BY_NAME',
-//         payload: name
-//     }
-// }
+export function filterActivity (name){
+    return{
+        type:'ACTIVITY_BY_NAME',
+        payload: name
+    }
+}
 
 export function filterByOrder(order){
     return{

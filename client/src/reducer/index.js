@@ -20,11 +20,11 @@ export default function rootReducer(state= initialState, action){
 
 
             
-        // case 'GET_ACTIVITIES':
-        //     return{
-        //         ...state,
-        //         Activities:action.payload
-        //     } 
+        case 'GET_ACTIVITIES':
+            return{
+                ...state,
+                Activities:action.payload
+            } 
 
 
         case 'GET_COUNTRY_NAME':
@@ -58,13 +58,14 @@ export default function rootReducer(state= initialState, action){
 
 
 
-        // case 'ACTIVITY_BY_NAME':
-        //     const allActivities = state.allActivities
-        //     const filteredActivities = action.payload === 'all' ? allActivities :  allActivities.filter(item => item.name === action.payload)
-        //     return{
-        //         ...state,
-        //         Activities: filteredActivities
-        //     } 
+        case 'ACTIVITY_BY_NAME':
+            const allActivities = state.allCountries
+            const filteredActivities =  allActivities[0]
+            
+            return{
+                ...state,
+                Countries: filteredActivities
+            } 
             
 
 
