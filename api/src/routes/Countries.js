@@ -43,35 +43,20 @@ const getInfoDataBase =  async () =>{
 router.get('/' , async (req,res)=>{
     try {
         const {name} = req.query
-        if(name){
-            // const response = await getInfoDataBase()
-            // const data = await response.filter(item.name.toLowerCase().include(name.toLowerCase()))
 
-            const data = await Country.findAll({
-                where:{
-                    name
-                },
-                include:{
-                    model: Activity,
-                    attributes: ['name'],
-                    through: {
-                        atrributes:[],
-                    },
-                }
-            })
-            data ? res.json(data) : res.json('name of city not equal country exist')
+        const verification= await Country.count()
+        if(verification < 1){
+            await apiInfo()
+        }
 
+        if(name){             
+        const response =  await Country.findAll()               
+        const data = await response.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
+        data.length ? res.json(data) : res.json('name of city not equal country exist')
+          
         }else{
-        
-            const verification= await Country.count()
-            if(verification > 1){
-                 const data = await getInfoDataBase()
-                res.json(data)
-            }else{
-                await apiInfo()
-                const data = await getInfoDataBase()
-                res.json(data)
-            }
+        const data = await getInfoDataBase()
+        res.json(data)
         }
     } catch (error) {
         res.json(error)
@@ -85,6 +70,12 @@ router.get('/' , async (req,res)=>{
 router.get('/:id', async (req,res) =>{
    try {
     const {id} = req.params
+
+    const verification= await Country.count()
+    if(verification < 1){
+        await apiInfo()
+    }
+    
     const data = await Country.findByPk(id,{
         include: Activity
     })
