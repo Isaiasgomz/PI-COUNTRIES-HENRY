@@ -5,6 +5,7 @@ const initialState = {
     allCountries:[],
     // Activities:[],
     // allActivities:[]
+    Detail:[]
 }
 
 export default function rootReducer(state= initialState, action){
@@ -25,12 +26,19 @@ export default function rootReducer(state= initialState, action){
         //         Activities:action.payload
         //     } 
 
+
         case 'GET_COUNTRY_NAME':
             return{
                 ...state,
                 Countries: action.payload
             }
             
+            
+        case 'GET_COUNTRY_ID':
+            return{
+                ...state,
+                Detail: action.payload
+            }    
 
         case 'POST_ACTIVITY':
             return{
@@ -87,6 +95,7 @@ export default function rootReducer(state= initialState, action){
                 ...state,
                 Countries:sortArray
             }
+
             
         case 'FILTER_BY_POPULATION':
                 const sortPopulation = action.payload === 'Asc' ?

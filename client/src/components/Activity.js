@@ -4,6 +4,13 @@ import {postActivity} from '../actions/index'
 import {useHistory} from 'react-router-dom'
 
 
+const validate = (input) =>{
+    const errors = {}
+    if(!input.name){
+        errors.name = 'Debes Ingresar Un Nombre'
+    }
+    return errors
+}
 
 function Activity() {
 
@@ -23,12 +30,19 @@ function Activity() {
         countries:[]
     })
 
+    const [errors, setErrors] = useState({})
+
     const handleInput = (e) =>{
         e.preventDefault()
         setInput({
             ...input,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...input,
+            [e.target.name]: e.target.value
+        }))
+
 
     }
 
@@ -80,6 +94,13 @@ function Activity() {
     }
 
 
+    const handleInputDelete = (element) =>{
+        setInput({
+            ...input,
+            countries: input.countries.filter(item => item !== element)
+        })
+    }
+
       return (
     <div>
 
@@ -91,8 +112,14 @@ function Activity() {
             <input type={'text'}
             name={'name'}
             value={input.name}
+            pattern='[A-Za-z0-9]{1,15}'
             onChange={(e)=> handleInput(e)}/>
             <br/>
+            {
+                errors.name && (
+                    <p>{errors.name}</p>
+                )
+            }
 
             
             
@@ -174,7 +201,7 @@ function Activity() {
              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
-
+            <br/>
             <select onChange={ (e) => handleSelectCountry(e)}>
                 <option>Seleccionar Paises</option>
                 { AllCountries && AllCountries.map(item => (
@@ -182,12 +209,29 @@ function Activity() {
                     value={item.name}>{item.name}</option>
                 ))}
             </select>
+            
+        
+
+               
+            
 
 
+        <br/>
         <button type='submit'>Crear Actividad</button>
       
         </form>
-
+        {
+                input.countries && input.countries.map(item =>(
+                    <div>
+                        <p>{item}</p>
+                        <button onClick={()=> handleInputDelete(item)}>X</button>
+                    </div>
+                    
+                ))
+            }
+         
+   
+   
     </div>
   )
 }

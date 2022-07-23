@@ -117,7 +117,7 @@ function Home() {
 
         {
             currentCountry && currentCountry.map(e => {
-                return <Card  key={e.id} flag={e.flag} name={e.name} continent={e.continent} />
+                return <Card  key={e.id} flag={e.flag} name={e.name} id={e.id} continent={e.continent} />
             })
         }
 

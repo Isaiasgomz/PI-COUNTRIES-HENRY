@@ -25,7 +25,7 @@ export function getCountries(){
 
 export function postActivity (activity) {
     return async function(dispatch){
-       const resolve = await axios.post('http://localhost:3001/activities', activity)
+       const resolve = await axios.post('http://localhost:3001/activities',activity)
        return resolve
     }
 }
@@ -70,5 +70,12 @@ export function getCountryByName (name){
         //    console.log(error) 
         // }
         
+    }
+}
+
+export function  getCountryId(id) {
+    return async function(dispatch){
+        const infoCountry = await axios.get(`http://localhost:3001/countries/${id}`)
+        return dispatch({ type: 'GET_COUNTRY_ID', payload: infoCountry.data})
     }
 }
