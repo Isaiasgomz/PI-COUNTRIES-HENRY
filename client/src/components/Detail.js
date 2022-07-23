@@ -19,6 +19,8 @@ function Detail(props) {
   
   
   return (
+    <React.Fragment>
+
     <div>
       {
         country ?
@@ -35,7 +37,34 @@ function Detail(props) {
           : <p>Loanding ... Please Await One Moment</p>
       }
     </div>
+   <div>
+
+      {
+        country.activities ? 
+      
+          country.activities.map(item => (
+            <div>
+              <h2>Actividades</h2>
+              <h4>Nombre {item.name}</h4>
+              <h4>Dificultad {item.difficulty}</h4>
+              <h4>Duracion {item.duration}</h4>
+              <h4>Season {item.season}</h4>
+            </div>
+            
+
+          ))
+        : <p>'Todavia No Hay Actividades Por Mostrar'</p>
+        }
+   </div>
+    
+    </React.Fragment>
+    
   )
 }
 
 export default Detail
+
+// "name": "ski",
+// "difficulty": 3,
+// "duration": "20:23",
+// "season": "Invierno",

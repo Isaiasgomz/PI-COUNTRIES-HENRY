@@ -59,12 +59,9 @@ export default function rootReducer(state= initialState, action){
 
 
         case 'ACTIVITY_BY_NAME':
-            const allActivities = state.allCountries
-            const filteredActivities =  allActivities[0]
-            
             return{
                 ...state,
-                Countries: filteredActivities
+                Countries: action.payload
             } 
             
 

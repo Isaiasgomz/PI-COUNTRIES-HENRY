@@ -69,7 +69,7 @@ function Activity() {
     }
 
     const handleSelectCountry = (e) =>{
-        console.log(e.target.value)
+        
         setInput({
             ...input,
             countries:[...input.countries, e.target.value]
@@ -78,7 +78,7 @@ function Activity() {
 
 
     const handleSubmit = (e)=>{
-        console.log(input)
+        
         e.preventDefault()
         dispatch(postActivity(input))
         setInput({

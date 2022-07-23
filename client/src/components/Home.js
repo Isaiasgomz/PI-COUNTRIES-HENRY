@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation, filterActivity, getActivities} from '../actions/index'
+import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation, filterActivity, getActivities, postActivity} from '../actions/index'
 import { Link } from 'react-router-dom'
 import Card from './Card'
 import Paginado from './Paginado'
@@ -12,17 +12,19 @@ function Home() {
     const dispatch = useDispatch()
     const AllCountries = useSelector((state) => state.Countries)
     const allActivities = useSelector((state) => state.Activities)
+    
 
+    const [activities,setActivities] = useState('')
     const [ordenado, setOrdenado]  = useState('')
     // const [orderPopulation, setOrderPopulation] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
     let [countriesPerPage, setCountriesPerPage] = useState(10)
-    // const indexOfLastCountry = currentPage * countriesPerPage
-    const indexOfLastCountry = currentPage * (currentPage === 1 ? countriesPerPage=9 :countriesPerPage)
+    const indexOfLastCountry = currentPage * countriesPerPage
+    // const indexOfLastCountry = currentPage * (currentPage === 1 ? countriesPerPage=9 :countriesPerPage)
 
     const indexOfFirstCouontry= indexOfLastCountry - countriesPerPage
     const currentCountry = AllCountries.slice(indexOfFirstCouontry,indexOfLastCountry) 
-
+    
     const paginado = (pageNumber)=>{
         setCurrentPage(pageNumber)
     }
@@ -30,7 +32,7 @@ function Home() {
     useEffect(() => {
         dispatch(getCountries())
         dispatch(getActivities()) 
-    },[dispatch]);
+    },[]);
 
     const handleUpdate = (e) =>{
         e.preventDefault()
@@ -43,10 +45,8 @@ function Home() {
     }
 
     function handleFilterCreated(e){
-        e.preventDefault()
         dispatch(filterActivity(e.target.value))
-        setCurrentPage(1)
-        setOrdenado(`ordenado ${e.target.value}`)
+       
     }
 
     function handleFilterByPopulation(e){
@@ -58,10 +58,10 @@ function Home() {
     }
 
     function handleFilterByName(e){
+        console.log(e.target.value)
         e.preventDefault()
         dispatch(filterByOrder(e.target.value))
-        setCurrentPage(1)
-        setOrdenado(`ordenado ${e.target.value}`)
+        setActivities(`ordenado ${e.target.value}`)
 
     }
 
@@ -107,18 +107,11 @@ function Home() {
 
 
 
-        <select >
-             <option name={'all'} 
-             value={'all'} 
-             onClick={(e) => handleFilterCreated(e)}>ACTIVIDAD</option>
-
+        <select onChange={(e) => handleFilterCreated(e)}>
+             <option >ACTIVIDAD</option>
             {
                 allActivities && allActivities.map(item => (
-                   <option 
-                   name={item.name}  
-                   value={item.name} 
-                    onClick={(e) => handleFilterCreated(e) } 
-                    >{item.name}</option>
+                   <option  key={item.id} value={item.name} >{item.name}</option>
                 ))
             }
         </select>

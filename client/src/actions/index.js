@@ -38,9 +38,9 @@ export function filteredCountryByType(typeOfCountry){
 }
 
 export function filterActivity (name){
-    return{
-        type:'ACTIVITY_BY_NAME',
-        payload: name
+    return async function(dispatch){
+        const json = await axios.get(`http://localhost:3001/activities?name=${name}`)
+        return dispatch({type: 'ACTIVITY_BY_NAME', payload: json.data})
     }
 }
 
