@@ -3,6 +3,8 @@ import {useDispatch, useSelector} from 'react-redux'
 
 import {getCountryId} from '../actions/index'
 
+import './Detail.css'
+
 
 
 function Detail(props) {

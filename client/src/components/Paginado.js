@@ -1,4 +1,5 @@
 import React from 'react'
+import './Paginado.css'
 
 function Paginado({countriesPerPage, allCountries, paginado}) {
     const pageNumbers = []
@@ -7,13 +8,13 @@ function Paginado({countriesPerPage, allCountries, paginado}) {
     }
 
   return (
-    <nav>
+    <nav className='nav'>
         <ul className='paginado'>
            
                 {
                     pageNumbers && pageNumbers.map(number =>(
                     <li className='number' key={number}>
-                        <a  onClick={() => paginado(number) }>{number}</a>
+                        <a className='item' onClick={() => paginado(number) }>{number}</a>
                     </li>
                     ))
                 }

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {getCountries, filteredCountryByType, filterByOrder, filterByPopulation, filterActivity, getActivities, postActivity} from '../actions/index'
-import { Link } from 'react-router-dom'
+
 import Card from './Card'
 import Paginado from './Paginado'
 import SearchBar from './SearchBar'
+import  './Home.css'
 
 
 function Home() {
@@ -66,20 +67,14 @@ function Home() {
     }
 
   return (
-    <div>
-        
-        <h1>PROYECTO INDIVIDUAL COUNTRIES</h1>
-        <button onClick={(e) => handleUpdate(e) }>Traer paises de nuevo</button>
-        <Link to={'/createActivity'}>Crear nueva Actividad</Link>
-
-
+      <div  className='home'>
         <SearchBar/>
         
-       
+        <div className='orders'>
 
 
-        <select onClick={(e) =>handleFilteredByType(e)}>
-            <option >CONTINENTE</option>
+        <select className='section' onClick={(e) =>handleFilteredByType(e)}>
+            <option value={'all'} >CONTINENTE</option>
             <option value={'all'}>Todos Los Continentes</option>
             <option value={'Africa'}>Africa</option>
             <option value={'Asia'}>Asia</option>
@@ -89,7 +84,7 @@ function Home() {
             <option value={'Oceania'}>Oceania</option>
         </select>
 
-        <select onClick={(e) => handleFilterByPopulation(e) }>
+        <select className='section' onClick={(e) => handleFilterByPopulation(e) }>
             <option >POBLACION</option>
             <option value={'Asc'}>Ascedente</option>
             <option value={'Desc'}>Descendente</option>
@@ -97,17 +92,14 @@ function Home() {
 
 
 
-        <select onClick={(e) => handleFilterByName(e) }>
+        <select className='section' onClick={(e) => handleFilterByName(e) }>
             <option >ORDEN</option>
             <option value={'Asc'}>Ascedente</option>
             <option value={'Desc'}>Descendente</option>
         </select>
 
 
-
-
-
-        <select onChange={(e) => handleFilterCreated(e)}>
+        <select className='section' onChange={(e) => handleFilterCreated(e)}>
              <option >ACTIVIDAD</option>
             {
                 allActivities && allActivities.map(item => (
@@ -116,11 +108,15 @@ function Home() {
             }
         </select>
 
-    
+        </div>
+
+
 
         <Paginado  countriesPerPage={countriesPerPage} 
         allCountries={AllCountries.length} 
         paginado={paginado}/>
+
+        <div className='cards'>
 
         {
             currentCountry && currentCountry.map(e => {
@@ -132,6 +128,9 @@ function Home() {
                  continent={e.continent} />
             })
         }
+       
+        </div>
+
 
     </div>
   )

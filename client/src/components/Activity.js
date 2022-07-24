@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {  useSelector,useDispatch } from 'react-redux'
 import {postActivity} from '../actions/index'
 import {useHistory} from 'react-router-dom'
+import './Activity.css'
 
 
 const validate = (input) =>{
@@ -102,14 +103,15 @@ function Activity() {
     }
 
       return (
-    <div>
+    <div className='form' >
 
-        <h1> Crea tu actividad</h1>
+        
 
         <form  onSubmit={(e) => handleSubmit(e)}>
 
-            <label>Nombre</label>
-            <input type={'text'}
+            <label>Nombre</label><br/>
+            <input className='form-input'
+             type={'text'}
             name={'name'}
             value={input.name}
             pattern='[A-Za-z0-9]{1,15}'
@@ -125,8 +127,8 @@ function Activity() {
             
             
             <label>
-            Duracion</label>
-            <input type={'time'} 
+            Duracion</label> <br/>
+            <input className='form-input' type={'time'} 
             name={'duration'} 
             value={input.duration}
             onChange={(e)=> handleInput(e)}/>
@@ -134,30 +136,33 @@ function Activity() {
 
 
 
-            <label>Temporada</label>
-            <label> Primavera
-            <input type={'checkbox'}
+            <label>Temporada</label><br/>
+            <label className='text-input'> Primavera 🌸
+            <input className='season' type={'checkbox'}
             name={'Primavera'}
             value={'Primavera'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
 
-            <label> Verano
-            <input type={'checkbox'}
+            <label> Verano 🥵
+            <input className='season'
+             type={'checkbox'}
             name={'Verano'}
             value={'Verano'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
 
-            <label> Otoño
-            <input type={'checkbox'}
+            <label> Otoño 🍁
+            <input className='season'
+             type={'checkbox'}
             name={'Otoño'}
             value={'Otoño'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
 
-            <label> Invierno
-            <input type={'checkbox'}
+            <label> Invierno 🥶
+            <input className='season'
+             type={'checkbox'}
             name={'Diciembre'}
             value={'Diciembre'}
             onChange={(e)=> handleCheckBoxSeason(e)}/> </label>
@@ -165,44 +170,49 @@ function Activity() {
 
 
 
-            <label> Dificultad</label>
-            <label> 1
-            <input  type={'checkbox'} 
+            <label> Dificultad</label><br/>
+            <label className='text-input'> 1
+            <input className='difficulty'  type={'checkbox'} 
              name={'difficulty'}
               value={'1'}
               onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
             <label> 2
-            <input  type={'checkbox'} 
+            <input  className='difficulty'
+             type={'checkbox'} 
              name={'difficulty'}
               value={'2'}
               onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
             <label> 3
-            <input  type={'checkbox'} 
+            <input className='difficulty'
+             type={'checkbox'} 
              name={'difficulty'} 
              value={'3'}
              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
             <label> 4
-            <input  type={'checkbox'} 
+            <input className='difficulty'
+             type={'checkbox'} 
              name={'difficulty'} 
              value={'4'}
              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
             <label> 5
-            <input  type={'checkbox'} 
+            <input  className='difficulty'
+             type={'checkbox'} 
              name={'difficulty'} 
              value={'5'}
              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
             </label>
 
             <br/>
-            <select onChange={ (e) => handleSelectCountry(e)}>
+            <label>Pais</label><br/>
+            <select className='form-input'  onChange={ (e) => handleSelectCountry(e)}>
                 <option>Seleccionar Paises</option>
                 { AllCountries && AllCountries.map(item => (
                     <option key={item.id}
@@ -217,12 +227,12 @@ function Activity() {
 
 
         <br/>
-        <button type='submit'>Crear Actividad</button>
+        <button className='input-button' type='submit'>Crear Actividad</button>
       
         </form>
         {
                 input.countries && input.countries.map(item =>(
-                    <div>
+                    <div className='input-options'>
                         <p>{item}</p>
                         <button onClick={()=> handleInputDelete(item)}>X</button>
                     </div>
@@ -238,10 +248,3 @@ function Activity() {
 
 export default Activity
 
-// [ ] Un formulario controlado con JavaScript con los siguientes campos:
-// Nombre
-// Dificultad
-// Duración
-// Temporada
-// [ ] Posibilidad de seleccionar/agregar varios países en simultáneo
-// [ ] Botón/Opción para crear una nueva actividad turística

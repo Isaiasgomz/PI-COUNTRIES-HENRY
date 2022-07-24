@@ -9,7 +9,7 @@ import Detail from './components/Detail'
 function App() {
   return (
     <React.Fragment>
-      <Route path={'/'} component={Landing}/>
+      <Route exact path={'/'} component={Landing}/>
       <Route exact path={'/home'} component={Home}/>
       <Route path={'/createActivity'} component={Activity}/>
       <Route path={'/detail/:id'} component={Detail}/>

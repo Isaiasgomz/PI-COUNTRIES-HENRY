@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import {getCountryByName} from '../actions/index'
+import './SearchBar.css'
+import {NavLink} from 'react-router-dom'
 
 
 function SearchBar() {
@@ -19,11 +21,12 @@ function SearchBar() {
     setName('')
   }
   return (
-    <div>
-      <input value={name} type={'text'}  placeholder='Buscar'  onChange={(e)=> handleInput(e)} />
+    <div className='container'>
+      <NavLink className='navlink-home' to={'/home'}>HOME</NavLink>
+      <input className='search' value={name} type={'text'}  placeholder='Buscar'  onChange={(e)=> handleInput(e)} />
 
-      <button type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>
-
+      <button className='button' type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>
+      <NavLink className='activity' to={'/createActivity'}>ACTIVIDAD</NavLink>
     </div>
   )
 }
