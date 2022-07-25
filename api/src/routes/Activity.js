@@ -12,19 +12,23 @@ router.get('/', async (req,res) =>{
             include: Activity
         }) 
     
-         const rta = response.filter(item =>{
+        
+        
+           const rta = await response.filter(item =>{
+            
             for (let index = 0; index < item.activities.length; index++) {
-                const element = item.activities[index].name
-                if(element === name){
+                 
+                if(item.activities[index].name === name ){
                     return true
-                }else{
-                    return false
                 }
                 
             }
-         })       
+         }) 
         
-           
+        
+        
+
+        
         rta.length ? res.json(rta) : res.json('name of activity not equal country exist')
     }else{
         
