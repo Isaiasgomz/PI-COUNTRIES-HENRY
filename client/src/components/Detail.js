@@ -23,10 +23,12 @@ function Detail(props) {
   return (
     <React.Fragment>
 
-    <div>
+    <div className='country-detail'>
       {
         country ?
-        <div>
+        <div className='country-info'>
+          <img className='img-detail' src={country.flag} alt='country'/>
+        <div className='description-detail'>
 
         <h1>Nombre: {country.name}</h1>
         <h3>ID : {country.id}</h3>
@@ -34,23 +36,24 @@ function Detail(props) {
         <h3>Poblacion : {country.population}</h3>
         <h3>Area : {country.area}</h3>
         <h3>SubRegion : {country.subregion}</h3>
-        <img src={country.flag} alt='country'/>
+        </div>
          </div>
           : <p>Loanding ... Please Await One Moment</p>
       }
     </div>
-   <div>
+
+   <div >
 
       {
         country.activities ? 
       
           country.activities.map(item => (
-            <div>
-              <h2>Actividades</h2>
-              <h4>Nombre {item.name}</h4>
-              <h4>Dificultad {item.difficulty}</h4>
-              <h4>Duracion {item.duration}</h4>
-              <h4>Season {item.season}</h4>
+            <div className='detail-activities'>
+              <h2>Actividad</h2>
+              <h4>Nombre: {item.name}</h4>
+              <h4>Dificultad: {item.difficulty}</h4>
+              <h4>Duracion: {item.duration}</h4>
+              <h4>Season :{item.season}</h4>
             </div>
             
 

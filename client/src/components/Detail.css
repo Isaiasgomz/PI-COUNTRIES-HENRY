@@ -1,0 +1,38 @@
+.country-detail{
+
+
+}
+
+
+.country-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+
+.img-detail{
+    width: 500px;
+    height: 300px;
+}
+
+.description-detail{
+    width: 550px;
+    height: 350px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: whitesmoke;
+
+}
+
+.detail-activities{
+    width: 300px;
+    height: 250px;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: whitesmoke;
+    margin-left: 600px;
+    
+}

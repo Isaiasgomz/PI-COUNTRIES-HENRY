@@ -100,7 +100,7 @@ function Home() {
 
 
         <select className='section' onChange={(e) => handleFilterCreated(e)}>
-             <option >ACTIVIDAD</option>
+             <option  >ACTIVIDAD</option>
             {
                 allActivities && allActivities.map(item => (
                    <option  key={item.id} value={item.name} >{item.name}</option>

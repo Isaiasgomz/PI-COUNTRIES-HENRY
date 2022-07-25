@@ -1,11 +1,14 @@
 .template{
     width:330px;
     height: 400px;
-    border: solid 1px black;
-    box-shadow: 2px 4px 4px #3f5efb;
+    box-shadow:  0 6px 4px 6px #94bbe9;
     padding: 50px 40px 50px 50px;
     margin-bottom: 50px;
     border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: whitesmoke;
 
 }
 
@@ -13,5 +16,16 @@ img{
     width: 200px;
     height: 150px;
     margin: 10px 15px 10px 15px;
+    
+}
+
+.card-detail{
+    width: 70px;
+    text-decoration: none;
+    color:white;
+    background-color:  #97adc689;
+    border-radius: 8px;
+    padding-left: 20px;
+    box-shadow: 0 5px 5px 0 #94bbe9;
     
 }

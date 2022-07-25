@@ -136,7 +136,7 @@ function Activity() {
 
 
 
-            <label>Temporada</label><br/>
+            <label >Temporada</label><br/>
             <label className='text-input'> Primavera 🌸
             <input className='season' type={'checkbox'}
             name={'Primavera'}
@@ -166,6 +166,7 @@ function Activity() {
             name={'Diciembre'}
             value={'Diciembre'}
             onChange={(e)=> handleCheckBoxSeason(e)}/> </label>
+            <br/>
             <br/>
 
 
@@ -208,7 +209,7 @@ function Activity() {
              name={'difficulty'} 
              value={'5'}
              onClick={(e) =>handleCheckBoxDifficulty(e)}/>
-            </label>
+            </label><br/>
 
             <br/>
             <label>Pais</label><br/>
@@ -230,15 +231,17 @@ function Activity() {
         <button className='input-button' type='submit'>Crear Actividad</button>
       
         </form>
+        <div className='section-options'>
         {
                 input.countries && input.countries.map(item =>(
                     <div className='input-options'>
                         <p>{item}</p>
-                        <button onClick={()=> handleInputDelete(item)}>X</button>
+                        <button className='options-button' onClick={()=> handleInputDelete(item)}>X</button>
                     </div>
                     
                 ))
             }
+        </div>
          
    
    

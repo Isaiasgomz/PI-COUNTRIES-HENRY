@@ -6,12 +6,17 @@
     flex-direction: row;
     align-items: center;
     justify-items: center;
-    background-color:#3f5efb;
+    background-color:#94bbe9;
 
 }
 
 .navlink-home{
+    width: 70px;
     margin-left: 30px;
+    background-color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    padding-left: 15px;
 
 }
 
@@ -33,4 +38,13 @@
     background-color: white;
     border-radius: 12px;
     margin-right: 300px;
+    cursor: pointer;
+}
+
+.activity{
+    width: 120px;
+    background-color: white;
+    border-radius: 12px;
+    text-decoration: none;
+    padding-left: 40px;
 }

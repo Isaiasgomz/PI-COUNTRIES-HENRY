@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import './Card.css'
 
 function Card({flag, name, continent, id}) {
@@ -8,9 +8,9 @@ function Card({flag, name, continent, id}) {
       <img  src={flag} alt={'Falg of Country'}  />
         <h2>{name}</h2>
       <h4>{continent}</h4>
-      <Link to={`/detail/${id}`}>
-        <h3>Detalle</h3>
-      </Link> 
+      <NavLink className={'card-detail'} to={`/detail/${id}`}>
+        Detalle
+      </NavLink> 
     </div>
   )
 }
