@@ -5,12 +5,18 @@ import './Card.css'
 function Card({flag, name, continent, id}) {
   return (
     <div className='template'>
-      <img  src={flag} alt={'Falg of Country'}  />
+      {
+        !flag ? '':<img  src={flag} alt={'Falg of Country'}  />
+      }
+      
         <h2>{name}</h2>
       <h4>{continent}</h4>
-      <NavLink className={'card-detail'} to={`/detail/${id}`}>
+      {
+        !continent ? '' : <NavLink className={'card-detail'} to={`/detail/${id}`} >
         Detalle
       </NavLink> 
+      }
+      
     </div>
   )
 }

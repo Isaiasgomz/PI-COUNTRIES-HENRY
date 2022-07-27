@@ -26,6 +26,7 @@ function Home() {
     const indexOfFirstCouontry= indexOfLastCountry - countriesPerPage
     const currentCountry = AllCountries.slice(indexOfFirstCouontry,indexOfLastCountry) 
     
+    
     const paginado = (pageNumber)=>{
         setCurrentPage(pageNumber)
     }
@@ -63,12 +64,15 @@ function Home() {
         e.preventDefault()
         dispatch(filterByOrder(e.target.value))
         setActivities(`ordenado ${e.target.value}`)
+        
 
     }
 
+    
+
   return (
       <div  className='home'>
-        <SearchBar/>
+        <SearchBar page={setCurrentPage} />
         
         <div className='orders'>
 
@@ -116,17 +120,19 @@ function Home() {
         allCountries={AllCountries.length} 
         paginado={paginado}/>
 
+          
         <div className='cards'>
 
         {
             currentCountry && currentCountry.map(e => {
                 return <Card 
-                 key={e.id} 
+                 key={e.id } 
                  flag={e.flag} 
                  name={e.name} 
                  id={e.id} 
                  continent={e.continent} />
             })
+           
         }
        
         </div>
