@@ -52,7 +52,7 @@ router.get('/' , async (req,res)=>{
         if(name){             
         const response =  await Country.findAll()               
         const data = await response.filter(item => item.name.toLowerCase().includes(name.toLowerCase()))
-        data.length ? res.json(data) : res.json('name of city not equal country exist')
+        data.length ? res.json(data) : res.json([{name: 'El nombre de la busqueda no coincide con ningun Pais'}])
           
         }else{
         const data = await getInfoDataBase()
