@@ -194,7 +194,6 @@ function Activity() {
              type={'text'}
             name={'name'}
             value={input.name}
-            pattern="[a-zA-Z ]{2,254}"
             onChange={(e)=> handleInput(e)}/>
             <br/>
             {

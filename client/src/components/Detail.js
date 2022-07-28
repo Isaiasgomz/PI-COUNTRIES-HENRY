@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 
 import {getCountryId} from '../actions/index'
@@ -8,6 +8,7 @@ import './Detail.css'
 
 
 function Detail(props) {
+  const [loading, setLoading] = useState(true)
 
  
   const dispatch = useDispatch()
@@ -15,6 +16,8 @@ function Detail(props) {
   
   useEffect(() =>{
     dispatch(getCountryId(props.match.params.id))
+    
+    
   },[])
   
   const country = useSelector((state) => state.Detail)
@@ -24,8 +27,11 @@ function Detail(props) {
     <React.Fragment>
 
     <div className='country-detail'>
+
+    
+
       {
-        country ?
+        country  ?
         <div className='country-info'>
           <img className='img-detail' src={country.flag} alt='country'/>
         <div className='description-detail'>
@@ -41,6 +47,8 @@ function Detail(props) {
           : <p>Loanding ... Please Await One Moment</p>
       }
     </div>
+
+    
 
    <div >
 
