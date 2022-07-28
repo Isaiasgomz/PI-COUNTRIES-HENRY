@@ -26,7 +26,7 @@ const validate = (input) =>{
     }else{
         button.disabled= false
     }
-    if(!input.difficulty){
+    if(!input.difficulty || input.difficulty.length > 2){
         errors.difficulty = 'Selecione un nivel de Dificultad'
         button.disabled= true
     }else{
@@ -41,6 +41,26 @@ const validate = (input) =>{
     
     return errors
 }
+
+
+
+function onlyOne(value){
+    var x = document.getElementsByClassName('season');
+    var i;
+    for (i = 0; i < x.length; i++) {
+      if(x[i].value !==  value) x[i].checked = false;}
+    
+    }
+
+    function onlyOneDifficulty(value){
+        var x = document.getElementsByClassName('difficulty');
+        var i;
+        for (i = 0; i < x.length; i++) {
+          if(x[i].value !==  value) x[i].checked = false;}
+        
+        }
+    
+
 
 function Activity() {
 
@@ -59,6 +79,8 @@ function Activity() {
         season:'',
         countries:[]
     })
+
+
 
     const [errors, setErrors] = useState({})
 
@@ -88,6 +110,7 @@ function Activity() {
                 ...input,
                 season: e.target.value
             }))
+            onlyOne(e.target.value)
             
         }
         if(!e.target.checked){
@@ -116,6 +139,8 @@ function Activity() {
                 ...input,
                 difficulty: e.target.value
             }))
+            onlyOneDifficulty(e.target.value)
+            
         }
         if(!e.target.checked){
             setErrors(validate({
@@ -157,8 +182,11 @@ function Activity() {
         })
         alert('Actividad Creada Correctamente')
        history.push('/home')
+       console.log(input)
        
     }
+    
+
 
 
     const handleInputDelete = (element) =>{
@@ -176,8 +204,8 @@ function Activity() {
 
     }
     
-    
-    
+
+
         
     
 
@@ -226,7 +254,7 @@ function Activity() {
             <label >Temporada</label><br/>
             <label className='text-input'> Primavera 🌸
             <input className='season' type={'checkbox'}
-            name={'Primavera'}
+            name={'check'}
             value={'Primavera'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
@@ -234,7 +262,7 @@ function Activity() {
             <label> Verano 🥵
             <input className='season'
              type={'checkbox'}
-            name={'Verano'}
+            name={'check'}
             value={'Verano'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
@@ -242,7 +270,7 @@ function Activity() {
             <label> Otoño 🍁
             <input className='season'
              type={'checkbox'}
-            name={'Otoño'}
+            name={'check'}
             value={'Otoño'}
             onChange={(e)=> handleCheckBoxSeason(e)}/>
             </label>
@@ -250,8 +278,8 @@ function Activity() {
             <label> Invierno 🥶
             <input className='season'
              type={'checkbox'}
-            name={'Diciembre'}
-            value={'Diciembre'}
+            name={'check'}
+            value={'Invierno'}
             onChange={(e)=> handleCheckBoxSeason(e)}/> </label>
             <br/>
             {
