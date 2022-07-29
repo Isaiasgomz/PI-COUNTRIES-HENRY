@@ -97,14 +97,14 @@ function Home() {
 
 
         <select className='section' onClick={(e) => handleFilterByName(e) }>
-            <option >ORDEN</option>
+            <option  >ORDEN</option>
             <option value={'Asc'}>Ascedente</option>
             <option value={'Desc'}>Descendente</option>
         </select>
 
 
         <select className='section' onChange={(e) => handleFilterCreated(e)}>
-             <option  >ACTIVIDAD</option>
+             <option value="" disabled selected hidden  >ACTIVIDAD</option>
             {
                 allActivities && allActivities.map(item => (
                    <option  key={item.id} value={item.name} >{item.name}</option>

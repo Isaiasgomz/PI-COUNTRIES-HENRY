@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {  useSelector,useDispatch } from 'react-redux'
-import {postActivity} from '../actions/index'
+import {getCountries, postActivity} from '../actions/index'
 import {useHistory} from 'react-router-dom'
 import './Activity.css'
 
@@ -63,6 +63,10 @@ function onlyOne(value){
 
 
 function Activity() {
+
+    useEffect(() =>{
+        dispatch(getCountries())
+    })
 
     const dispatch = useDispatch()
 
@@ -219,6 +223,7 @@ function Activity() {
             <label>Nombre</label><br/>
             <input className='form-input'
             required={true}
+            pattern="[a-zA-Z ]{2,254}"
              type={'text'}
             name={'name'}
             value={input.name}
