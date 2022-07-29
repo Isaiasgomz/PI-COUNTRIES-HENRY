@@ -23,7 +23,7 @@ function SearchBar(props) {
   }
   return (
     <div className='container'>
-      <NavLink className='navlink-home' to={'/home'}>HOME</NavLink>
+      <NavLink className='navlink-home' to={'/'}>Atras</NavLink>
       <input className='search' value={name} type={'text'}  pattern="[a-zA-Z ]{2,254}" placeholder='Buscar Pais'  onChange={(e)=> handleInput(e)} />
 
       <button disabled={name.length < 2 ? true : false} className='button' type='submit' onClick={(e) => handleSubmit(e)}>Buscar</button>

@@ -3,6 +3,7 @@ import {  useSelector,useDispatch } from 'react-redux'
 import {getCountries, postActivity} from '../actions/index'
 import {useHistory} from 'react-router-dom'
 import './Activity.css'
+import NavBar from './NavBar'
 
 
 const validate = (input) =>{
@@ -198,7 +199,7 @@ function Activity() {
             ...input,
             countries: input.countries.filter(item => item !== element)
         })
-        if(input.countries.length > 0 ){
+        if(input.countries.length < 1 ){
             setErrors(validate({
                 ...input,
                 countries: []
@@ -214,7 +215,9 @@ function Activity() {
     
 
       return (
-    <div className='form' >
+        <React.Fragment>
+        <NavBar></NavBar>
+            <div className='form' >
 
         
 
@@ -381,6 +384,7 @@ function Activity() {
    
    
     </div>
+        </React.Fragment>
   )
 }
 
