@@ -9,7 +9,7 @@ import NavBar from './NavBar'
 const validate = (input) =>{
     const button = document.getElementById('error')
     const errors = {}
-    if(!input.name || input.name.length <= 2){
+    if(!input.name || input.name.length < 3){
         errors.name = 'Debes Ingresar Un Nombre mayor a 2 letras y no debe incluir caracteres especiales ni simbolos'
         button.disabled= true
     }else{
@@ -226,7 +226,7 @@ function Activity() {
             <label>Nombre</label><br/>
             <input className='form-input'
             required={true}
-            pattern="[a-zA-Z ]{2,254}"
+            pattern="[a-zA-Z ]{3,254}"
              type={'text'}
             name={'name'}
             value={input.name}
