@@ -69,7 +69,7 @@ export default function rootReducer(state= initialState, action){
             
         case 'ACTIVITY_BY_ORDER':
 
-            const sortArray = action.payload === 'Desc' ?
+            const sortArray = action.payload === 'Asc' ?
             state.Countries.sort(function(a,b) {
                 if(a.name > b.name) {
                     return 1
